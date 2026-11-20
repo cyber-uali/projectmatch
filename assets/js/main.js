@@ -7,6 +7,12 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Тексты берём из словаря i18n.js, чтобы aria-label менялся вместе с языком
+  function t(key, fallback) {
+    var value = window.PM_t ? window.PM_t(key) : '';
+    return value || fallback;
+  }
+
   /* ---------- 1. Тень у хедера при скролле ---------- */
   var header = document.getElementById('header');
   function onScroll() {
@@ -24,14 +30,14 @@
     if (!nav || !burger) return;
     nav.classList.remove('is-open');
     burger.setAttribute('aria-expanded', 'false');
-    burger.setAttribute('aria-label', 'Открыть меню');
+    burger.setAttribute('aria-label', t('a11y.menuOpen', 'Открыть меню'));
   }
 
   if (burger && nav) {
     burger.addEventListener('click', function () {
       var isOpen = nav.classList.toggle('is-open');
       burger.setAttribute('aria-expanded', String(isOpen));
-      burger.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+      burger.setAttribute('aria-label', isOpen ? t('a11y.menuClose', 'Закрыть меню') : t('a11y.menuOpen', 'Открыть меню'));
     });
 
     // Закрываем меню после клика по любой ссылке внутри
@@ -162,17 +168,24 @@
   // даём мягкий отклик, чтобы прототип ощущался живым.
   document.addEventListener('click', function (event) {
     var button = event.target.closest('.person__foot .btn--primary');
-    if (!button) return;
+    if (!button || button.disabled) return;
 
-    var original = button.textContent;
-    button.textContent = 'Приглашение отправлено';
+    button.textContent = t('common.invited', 'Приглашение отправлено');
     button.disabled = true;
     button.style.opacity = '0.75';
 
     window.setTimeout(function () {
-      button.textContent = original;
       button.disabled = false;
       button.style.opacity = '';
+      var key = button.getAttribute('data-i18n');
+      button.textContent = key ? t(key, button.textContent) : button.textContent;
     }, 1800);
+  });
+
+  // Если язык переключили, пока кнопка показывает «отправлено», — обновляем текст
+  document.addEventListener('pm:lang', function () {
+    document.querySelectorAll('.person__foot .btn--primary[disabled]').forEach(function (button) {
+      button.textContent = t('common.invited', 'Приглашение отправлено');
+    });
   });
 })();

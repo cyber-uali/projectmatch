@@ -313,6 +313,36 @@ img, svg { display: block; max-width: 100%; }
 
 .header__actions { display: flex; align-items: center; gap: 10px; }
 
+/* Переключатель языка: маленький сегментированный контрол */
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+.lang__btn {
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  padding: 6px 9px;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.lang__btn:hover { color: var(--ink); }
+.lang__btn.is-active { background: var(--ink); color: #fff; }
+.lang__btn.is-active:hover { color: #fff; }
+.lang__btn:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+
 .burger {
   display: none;
   width: 42px;
@@ -717,6 +747,9 @@ img, svg { display: block; max-width: 100%; }
   gap: 12px;
 }
 .bar__label { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
+/* Казахские подписи длиннее — даём колонке больше места, чтобы не наезжать на шкалу */
+html[lang="kk"] .bar { grid-template-columns: 112px 1fr 30px; gap: 10px; }
+html[lang="kk"] .bar__label { font-size: 12px; letter-spacing: -0.01em; }
 .bar__track {
   height: 8px;
   border-radius: 999px;
@@ -756,8 +789,9 @@ img, svg { display: block; max-width: 100%; }
   color: var(--muted);
   padding: 0 4px 8px;
 }
-.kanban__title span {
+.kanban__count {
   font-size: 9.5px;
+  font-weight: 700;
   background: #fff;
   border-radius: 5px;
   padding: 1px 5px;

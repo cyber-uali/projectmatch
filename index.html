@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ProjectMatch — реализуй свои идеи с правильной командой</title>
-  <meta name="description" content="ProjectMatch — AI-платформа для школьников 15–18 лет: подбирает тиммейтов по навыкам, интересам и целям и даёт рабочее пространство, чтобы проект дошёл до финала." />
+  <title id="page-title">ProjectMatch — реализуй свои идеи с правильной командой</title>
+  <meta id="meta-description" name="description" content="ProjectMatch — AI-платформа для школьников 15–18 лет: подбирает тиммейтов по навыкам, интересам и целям и даёт рабочее пространство, чтобы проект дошёл до финала." />
   <meta name="theme-color" content="#faf8f5" />
 
   <!-- Open Graph (для превью в мессенджерах, когда прототип будут показывать) -->
-  <meta property="og:title" content="ProjectMatch — реализуй свои идеи с правильной командой" />
-  <meta property="og:description" content="AI-мэтчинг тиммейтов для школьников 15–18 лет. Профиль, идея, команда и канбан-доска проекта." />
+  <meta id="og-title" property="og:title" content="ProjectMatch — реализуй свои идеи с правильной командой" />
+  <meta id="og-description" property="og:description" content="AI-мэтчинг тиммейтов для школьников 15–18 лет. Профиль, идея, команда и канбан-доска проекта." />
   <meta property="og:type" content="website" />
 
   <!-- Favicon: инлайновый SVG, чтобы не тащить лишние файлы -->
@@ -25,12 +25,12 @@
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Перейти к содержанию</a>
 
   <!-- ============ HEADER ============ -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a class="brand" href="#top" aria-label="ProjectMatch — на главную">
+      <a class="brand" href="#top" aria-label="ProjectMatch — на главную" data-i18n-aria-label="a11y.brand">
         <span class="brand__mark" aria-hidden="true">
           <svg viewBox="0 0 32 32" width="32" height="32">
             <rect width="32" height="32" rx="9" fill="currentColor" />
@@ -41,17 +41,21 @@
         <span class="brand__name">Project<span>Match</span></span>
       </a>
 
-      <nav class="nav" id="nav" aria-label="Основная навигация">
-        <a class="nav__link" href="#how">Как это работает</a>
-        <a class="nav__link" href="#features">Возможности</a>
-        <a class="nav__link" href="#match">AI Matching</a>
-        <a class="nav__link" href="#research">Исследование</a>
-        <a class="btn btn--primary btn--sm nav__cta" href="#match">Найти тиммейта</a>
+      <nav class="nav" id="nav" aria-label="Основная навигация" data-i18n-aria-label="a11y.nav">
+        <a class="nav__link" href="#how" data-i18n="nav.how">Как это работает</a>
+        <a class="nav__link" href="#features" data-i18n="nav.features">Возможности</a>
+        <a class="nav__link" href="#match" data-i18n="nav.match">AI Matching</a>
+        <a class="nav__link" href="#research" data-i18n="nav.research">Исследование</a>
+        <a class="btn btn--primary btn--sm nav__cta" href="#match" data-i18n="nav.cta">Найти тиммейта</a>
       </nav>
 
       <div class="header__actions">
-        <a class="btn btn--primary btn--sm header__cta" href="#match">Найти тиммейта</a>
-        <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню">
+        <div class="lang" role="group" aria-label="Язык интерфейса" data-i18n-aria-label="lang.label">
+          <button class="lang__btn is-active" type="button" data-lang="ru" aria-pressed="true" lang="ru">РУС</button>
+          <button class="lang__btn" type="button" data-lang="kk" aria-pressed="false" lang="kk">ҚАЗ</button>
+        </div>
+        <a class="btn btn--primary btn--sm header__cta" href="#match" data-i18n="nav.cta">Найти тиммейта</a>
+        <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню" data-i18n-aria-label="a11y.menu">
           <span></span><span></span>
         </button>
       </div>
@@ -68,32 +72,32 @@
         <div class="hero__copy reveal">
           <p class="eyebrow">
             <span class="eyebrow__dot" aria-hidden="true"></span>
-            AI-мэтчинг для школьников 15–18 лет
+            <span data-i18n="hero.eyebrow">AI-мэтчинг для школьников 15–18 лет</span>
           </p>
 
-          <h1 class="hero__title">
+          <h1 class="hero__title" data-i18n-html="hero.title">
             Реализуй свои идеи с <em>правильной</em> командой
           </h1>
 
-          <p class="hero__lead">
+          <p class="hero__lead" data-i18n="hero.lead">
             ProjectMatch подбирает тиммейтов по навыкам, интересам и целям — и даёт общее
             рабочее пространство, чтобы проект дошёл до финала, а не остался в заметках.
           </p>
 
           <div class="hero__actions">
             <a class="btn btn--primary btn--lg" href="#match">
-              Найти тиммейта
+              <span data-i18n="hero.ctaPrimary">Найти тиммейта</span>
               <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
                 <path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </a>
-            <a class="btn btn--outline btn--lg" href="#how">Как это работает</a>
+            <a class="btn btn--outline btn--lg" href="#how" data-i18n="hero.ctaSecondary">Как это работает</a>
           </div>
 
           <ul class="hero__meta">
-            <li>Бесплатно для участников</li>
-            <li>Профиль за 2 минуты</li>
-            <li>Без олимпиад и портфолио</li>
+            <li data-i18n="hero.meta1">Бесплатно для участников</li>
+            <li data-i18n="hero.meta2">Профиль за 2 минуты</li>
+            <li data-i18n="hero.meta3">Без олимпиад и портфолио</li>
           </ul>
 
           <div class="hero__trust">
@@ -105,7 +109,8 @@
               <span class="avatar avatar--xs avatar--more">+96</span>
             </div>
             <p class="hero__trust-text">
-              <strong data-count="1240">1 240</strong> школьников уже ищут команду
+              <strong data-count="1240">1 240</strong>
+              <span data-i18n="hero.trustSuffix">школьников уже ищут команду</span>
             </p>
           </div>
         </div>
@@ -115,45 +120,49 @@
           <div class="stage">
             <p class="stage__tag">
               <span class="stage__tag-dot" aria-hidden="true"></span>
-              Демо AI Matching · учебные данные
+              <span data-i18n="hero.demoTag">Демо AI Matching · учебные данные</span>
             </p>
 
             <div class="stage__card">
               <article class="person person--hero">
                 <p class="person__context">
                   <span class="person__context-dot" aria-hidden="true"></span>
-                  Совпадение для проекта «Эко-мониторинг воздуха»
+                  <span data-i18n="hero.context">Совпадение для проекта «Эко-мониторинг воздуха»</span>
                 </p>
                 <div class="person__head">
                   <span class="avatar avatar--lg" data-tone="violet">МК</span>
                   <div class="person__id">
                     <h2 class="person__name">Маша Климова</h2>
-                    <p class="person__role">Frontend · React · 16 лет</p>
+                    <p class="person__role" data-i18n="hero.role">Frontend · React · 16 лет</p>
                   </div>
-                  <div class="ring" data-p="86" style="--p: 0" role="img" aria-label="Совпадение 86 процентов">
+                  <div class="ring" data-p="86" style="--p: 0" role="img" aria-label="Совпадение 86 процентов" data-i18n-aria-label="a11y.match86">
                     <span>86<small>%</small></span>
                   </div>
                 </div>
 
-                <p class="person__bio">
+                <p class="person__bio" data-i18n="hero.bio">
                   Собирает интерфейсы на React и хочет сделать сервис, который помогает
                   школьным кружкам находить участников.
                 </p>
 
                 <dl class="person__facts">
                   <div class="fact">
-                    <dt>Навыки</dt>
+                    <dt data-i18n="common.skills">Навыки</dt>
                     <dd class="tags"><span>React</span><span>TypeScript</span><span>Figma</span></dd>
                   </div>
                   <div class="fact">
-                    <dt>Совпало</dt>
-                    <dd class="tags tags--match"><span>EdTech</span><span>Нейросети</span><span>UI/UX</span></dd>
+                    <dt data-i18n="common.matched">Совпало</dt>
+                    <dd class="tags tags--match">
+                      <span>EdTech</span>
+                      <span data-i18n="tag.ai">Нейросети</span>
+                      <span>UI/UX</span>
+                    </dd>
                   </div>
                 </dl>
 
                 <div class="person__foot">
-                  <button class="btn btn--primary btn--block" type="button">Пригласить в проект</button>
-                  <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное">
+                  <button class="btn btn--primary btn--block" type="button" data-i18n="common.invite">Пригласить в проект</button>
+                  <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное" data-i18n-aria-label="a11y.saveProfile">
                     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                       <path d="M12 20s-7-4.35-7-9a3.9 3.9 0 0 1 7-2.4A3.9 3.9 0 0 1 19 11c0 4.65-7 9-7 9Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
                     </svg>
@@ -168,42 +177,42 @@
                   </svg>
                 </span>
                 <span class="toast__text">
-                  <strong>Команда собрана</strong>
-                  4 участника · проект стартовал
+                  <strong data-i18n="toast.title">Команда собрана</strong>
+                  <span data-i18n="toast.text">4 участника · проект стартовал</span>
                 </span>
               </div>
             </div>
 
-            <p class="stage__note">Пример демонстрации алгоритма, а не реальные результаты AI</p>
+            <p class="stage__note" data-i18n="hero.note">Пример демонстрации алгоритма, а не реальные результаты AI</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ MARQUEE: направления проектов ============ -->
-    <section class="marquee" aria-label="Направления проектов на платформе">
+    <section class="marquee" aria-label="Направления проектов на платформе" data-i18n-aria-label="a11y.directions">
       <div class="marquee__track">
         <div class="marquee__group">
-          <span>Робототехника</span><i aria-hidden="true">✳</i>
-          <span>Эко-tech</span><i aria-hidden="true">✳</i>
-          <span>Нейросети</span><i aria-hidden="true">✳</i>
-          <span>Медиа и подкасты</span><i aria-hidden="true">✳</i>
-          <span>Продуктовый дизайн</span><i aria-hidden="true">✳</i>
-          <span>Урбанистика</span><i aria-hidden="true">✳</i>
-          <span>Игры</span><i aria-hidden="true">✳</i>
-          <span>Соцпроекты</span><i aria-hidden="true">✳</i>
-          <span>Био и медицина</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.robotics">Робототехника</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.eco">Эко-tech</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.ai">Нейросети</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.media">Медиа и подкасты</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.design">Продуктовый дизайн</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.city">Урбанистика</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.games">Игры</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.social">Соцпроекты</span><i aria-hidden="true">✳</i>
+          <span data-i18n="dir.bio">Био и медицина</span><i aria-hidden="true">✳</i>
         </div>
         <div class="marquee__group" aria-hidden="true">
-          <span>Робототехника</span><i>✳</i>
-          <span>Эко-tech</span><i>✳</i>
-          <span>Нейросети</span><i>✳</i>
-          <span>Медиа и подкасты</span><i>✳</i>
-          <span>Продуктовый дизайн</span><i>✳</i>
-          <span>Урбанистика</span><i>✳</i>
-          <span>Игры</span><i>✳</i>
-          <span>Соцпроекты</span><i>✳</i>
-          <span>Био и медицина</span><i>✳</i>
+          <span data-i18n="dir.robotics">Робототехника</span><i>✳</i>
+          <span data-i18n="dir.eco">Эко-tech</span><i>✳</i>
+          <span data-i18n="dir.ai">Нейросети</span><i>✳</i>
+          <span data-i18n="dir.media">Медиа и подкасты</span><i>✳</i>
+          <span data-i18n="dir.design">Продуктовый дизайн</span><i>✳</i>
+          <span data-i18n="dir.city">Урбанистика</span><i>✳</i>
+          <span data-i18n="dir.games">Игры</span><i>✳</i>
+          <span data-i18n="dir.social">Соцпроекты</span><i>✳</i>
+          <span data-i18n="dir.bio">Био и медицина</span><i>✳</i>
         </div>
       </div>
     </section>
@@ -212,9 +221,11 @@
     <section class="section" id="how">
       <div class="container">
         <header class="section__head reveal">
-          <p class="eyebrow">Как это работает</p>
-          <h2 class="section__title">От идеи до команды — <em>три шага</em></h2>
-          <p class="section__lead">
+          <p class="eyebrow" data-i18n="how.eyebrow">Как это работает</p>
+          <h2 class="section__title" data-i18n-html="how.title">
+            От идеи до команды — <em>три шага</em>
+          </h2>
+          <p class="section__lead" data-i18n="how.lead">
             Без бесконечных чатов и сообщений «есть кто-нибудь, кто умеет в код?»
           </p>
         </header>
@@ -228,8 +239,8 @@
                 <path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4S18.3 16.4 19.5 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
               </svg>
             </span>
-            <h3 class="step__title">Создай профиль</h3>
-            <p class="step__text">
+            <h3 class="step__title" data-i18n="how.step1.title">Создай профиль</h3>
+            <p class="step__text" data-i18n="how.step1.text">
               Навыки, интересы, формат работы и цели. Две минуты — и тебя уже можно найти.
             </p>
           </li>
@@ -242,8 +253,8 @@
                 <path d="M13 6.8l4.2 4.2" fill="none" stroke="currentColor" stroke-width="1.7" />
               </svg>
             </span>
-            <h3 class="step__title">Опиши идею</h3>
-            <p class="step__text">
+            <h3 class="step__title" data-i18n="how.step2.title">Опиши идею</h3>
+            <p class="step__text" data-i18n="how.step2.text">
               Что хочешь сделать и кто нужен в команду: разработчик, дизайнер, исследователь.
             </p>
           </li>
@@ -256,14 +267,14 @@
                 <path d="M18.5 16.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z" fill="currentColor" />
               </svg>
             </span>
-            <h3 class="step__title">AI подберёт команду</h3>
-            <p class="step__text">
+            <h3 class="step__title" data-i18n="how.step3.title">AI подберёт команду</h3>
+            <p class="step__text" data-i18n="how.step3.text">
               Алгоритм сравнит навыки, интересы и цели — и покажет, почему вы подходите друг другу.
             </p>
           </li>
         </ol>
 
-        <p class="steps__note reveal">
+        <p class="steps__note reveal" data-i18n="how.note">
           Дальше команда получает рабочее пространство с задачами, исполнителями и дедлайнами.
         </p>
       </div>
@@ -273,9 +284,11 @@
     <section class="section section--tint" id="features">
       <div class="container">
         <header class="section__head reveal">
-          <p class="eyebrow">Возможности</p>
-          <h2 class="section__title">Не просто нетворкинг, а <em>рабочий процесс</em></h2>
-          <p class="section__lead">
+          <p class="eyebrow" data-i18n="features.eyebrow">Возможности</p>
+          <h2 class="section__title" data-i18n-html="features.title">
+            Не просто нетворкинг, а <em>рабочий процесс</em>
+          </h2>
+          <p class="section__lead" data-i18n="features.lead">
             Платформа закрывает весь путь: от «есть идея» до «проект готов и его можно показать».
           </p>
         </header>
@@ -283,25 +296,25 @@
         <div class="bento">
           <!-- 1. AI Matching -->
           <article class="card card--match reveal">
-            <h3 class="card__title">AI Matching с объяснением</h3>
-            <p class="card__text">
+            <h3 class="card__title" data-i18n="features.match.title">AI Matching с объяснением</h3>
+            <p class="card__text" data-i18n="features.match.text">
               Совпадение считается по навыкам, интересам, целям и темпу работы.
               Всегда видно, почему карточка оказалась в подборке.
             </p>
 
             <div class="bars" aria-hidden="true">
               <div class="bar">
-                <span class="bar__label">Навыки</span>
+                <span class="bar__label" data-i18n="bar.skills">Навыки</span>
                 <span class="bar__track"><span class="bar__fill" style="--w: 92%"></span></span>
                 <span class="bar__value">92</span>
               </div>
               <div class="bar">
-                <span class="bar__label">Интересы</span>
+                <span class="bar__label" data-i18n="bar.interests">Интересы</span>
                 <span class="bar__track"><span class="bar__fill" style="--w: 88%"></span></span>
                 <span class="bar__value">88</span>
               </div>
               <div class="bar">
-                <span class="bar__label">Цели</span>
+                <span class="bar__label" data-i18n="bar.goals">Цели</span>
                 <span class="bar__track"><span class="bar__fill" style="--w: 81%"></span></span>
                 <span class="bar__value">81</span>
               </div>
@@ -312,63 +325,63 @@
           <article class="card card--kanban reveal" data-delay="1">
             <div class="card__top">
               <h3 class="card__title">Team Workspace</h3>
-              <span class="pill pill--soft">Канбан</span>
+              <span class="pill pill--soft" data-i18n="features.kanban.pill">Канбан</span>
             </div>
-            <p class="card__text">
+            <p class="card__text" data-i18n="features.kanban.text">
               Доска, исполнители и дедлайны. Команда видит, кто что делает и где застрял проект.
             </p>
 
             <div class="kanban" aria-hidden="true">
               <div class="kanban__col">
-                <p class="kanban__title">To Do <span>3</span></p>
+                <p class="kanban__title"><span data-i18n="kanban.todo">To Do</span> <b class="kanban__count">3</b></p>
                 <div class="task">
-                  <p>Интервью с 10 школьниками</p>
+                  <p data-i18n="kanban.t1">Интервью с 10 школьниками</p>
                   <div class="task__foot">
                     <span class="avatar avatar--xxs" data-tone="coral">ЛД</span>
-                    <span class="task__date">18 ноя</span>
+                    <span class="task__date" data-i18n="date.nov18">18 ноя</span>
                   </div>
                 </div>
                 <div class="task">
-                  <p>Собрать прототип экрана</p>
+                  <p data-i18n="kanban.t2">Собрать прототип экрана</p>
                   <div class="task__foot">
                     <span class="avatar avatar--xxs" data-tone="violet">МК</span>
-                    <span class="task__date">21 ноя</span>
+                    <span class="task__date" data-i18n="date.nov21">21 ноя</span>
                   </div>
                 </div>
               </div>
 
               <div class="kanban__col">
-                <p class="kanban__title">In Progress <span>2</span></p>
+                <p class="kanban__title"><span data-i18n="kanban.progress">In Progress</span> <b class="kanban__count">2</b></p>
                 <div class="task">
-                  <p>Лендинг: секция героя</p>
+                  <p data-i18n="kanban.t3">Лендинг: секция героя</p>
                   <div class="task__foot">
                     <span class="avatar avatar--xxs" data-tone="lime">АС</span>
-                    <span class="task__date">16 ноя</span>
+                    <span class="task__date" data-i18n="date.nov16">16 ноя</span>
                   </div>
                 </div>
                 <div class="task task--accent">
-                  <p>Мэтчинг: тест алгоритма</p>
+                  <p data-i18n="kanban.t4">Мэтчинг: тест алгоритма</p>
                   <div class="task__foot">
                     <span class="avatar avatar--xxs" data-tone="sky">ТР</span>
-                    <span class="task__date">сегодня</span>
+                    <span class="task__date" data-i18n="date.today">сегодня</span>
                   </div>
                 </div>
               </div>
 
               <div class="kanban__col">
-                <p class="kanban__title">Done <span>4</span></p>
+                <p class="kanban__title"><span data-i18n="kanban.done">Done</span> <b class="kanban__count">4</b></p>
                 <div class="task task--done">
-                  <p>Название и позиционирование</p>
+                  <p data-i18n="kanban.t5">Название и позиционирование</p>
                   <div class="task__foot">
                     <span class="avatar avatar--xxs" data-tone="violet">МК</span>
-                    <span class="task__date">12 ноя</span>
+                    <span class="task__date" data-i18n="date.nov12">12 ноя</span>
                   </div>
                 </div>
                 <div class="task task--done">
-                  <p>Бриф для дизайнера</p>
+                  <p data-i18n="kanban.t6">Бриф для дизайнера</p>
                   <div class="task__foot">
                     <span class="avatar avatar--xxs" data-tone="coral">ЛД</span>
-                    <span class="task__date">11 ноя</span>
+                    <span class="task__date" data-i18n="date.nov11">11 ноя</span>
                   </div>
                 </div>
               </div>
@@ -378,36 +391,36 @@
           <!-- 3. Философия продукта -->
           <article class="card card--quote reveal">
             <span class="quote-mark" aria-hidden="true">“</span>
-            <blockquote class="card__quote">
+            <blockquote class="card__quote" data-i18n-html="features.quote">
               Хорошее портфолио — приятный побочный эффект. Цель в другом:
               чтобы твоя идея <em>действительно существовала</em>.
             </blockquote>
-            <p class="card__sign">Позиционирование ProjectMatch</p>
+            <p class="card__sign" data-i18n="features.quoteSign">Позиционирование ProjectMatch</p>
           </article>
 
           <!-- 4. Прогресс -->
           <article class="card card--progress reveal" data-delay="1">
-            <h3 class="card__title">Прогресс и дедлайны</h3>
-            <p class="card__text">
+            <h3 class="card__title" data-i18n="features.progress.title">Прогресс и дедлайны</h3>
+            <p class="card__text" data-i18n="features.progress.text">
               Статус задач и сроки в одном месте. Больше не нужно спрашивать «что там по проекту?»
             </p>
 
             <div class="progress-list" aria-hidden="true">
               <div class="progress">
                 <div class="progress__row">
-                  <span>Исследование аудитории</span><span>100%</span>
+                  <span data-i18n="progress.p1">Исследование аудитории</span><span>100%</span>
                 </div>
                 <span class="progress__track"><span class="progress__fill" style="--w: 100%"></span></span>
               </div>
               <div class="progress">
                 <div class="progress__row">
-                  <span>Прототип платформы</span><span>68%</span>
+                  <span data-i18n="progress.p2">Прототип платформы</span><span>68%</span>
                 </div>
                 <span class="progress__track"><span class="progress__fill" style="--w: 68%"></span></span>
               </div>
               <div class="progress">
                 <div class="progress__row">
-                  <span>Питч и презентация</span><span>25%</span>
+                  <span data-i18n="progress.p3">Питч и презентация</span><span>25%</span>
                 </div>
                 <span class="progress__track"><span class="progress__fill" style="--w: 25%"></span></span>
               </div>
@@ -422,10 +435,10 @@
       <div class="container">
         <header class="section__head section__head--split reveal">
           <div>
-            <p class="eyebrow">Демо AI Matching</p>
-            <h2 class="section__title">Посмотри, как выглядит <em>подбор</em></h2>
+            <p class="eyebrow" data-i18n="demo.eyebrow">Демо AI Matching</p>
+            <h2 class="section__title" data-i18n-html="demo.title">Посмотри, как выглядит <em>подбор</em></h2>
           </div>
-          <p class="section__lead">
+          <p class="section__lead" data-i18n="demo.lead">
             Три профиля из учебного набора. Процент совпадения считается по пересечению
             навыков, интересов и целей проекта.
           </p>
@@ -437,28 +450,28 @@
               <span class="avatar avatar--lg" data-tone="violet">МК</span>
               <div class="person__id">
                 <h3 class="person__name">Маша Климова</h3>
-                <p class="person__role">Frontend · React · 16 лет</p>
+                <p class="person__role" data-i18n="demo.p1.role">Frontend · React · 16 лет</p>
               </div>
-              <div class="ring" data-p="86" style="--p: 0" role="img" aria-label="Совпадение 86 процентов">
+              <div class="ring" data-p="86" style="--p: 0" role="img" aria-label="Совпадение 86 процентов" data-i18n-aria-label="a11y.match86">
                 <span>86<small>%</small></span>
               </div>
             </div>
-            <p class="person__bio">
+            <p class="person__bio" data-i18n="demo.p1.bio">
               Собирает интерфейсы на React. Хочет сделать сервис для школьных кружков.
             </p>
             <dl class="person__facts">
               <div class="fact">
-                <dt>Навыки</dt>
+                <dt data-i18n="common.skills">Навыки</dt>
                 <dd class="tags"><span>React</span><span>TypeScript</span><span>Figma</span></dd>
               </div>
               <div class="fact">
-                <dt>Совпало</dt>
+                <dt data-i18n="common.matched">Совпало</dt>
                 <dd class="tags tags--match"><span>EdTech</span><span>UI/UX</span></dd>
               </div>
             </dl>
             <div class="person__foot">
-              <button class="btn btn--primary btn--block" type="button">Пригласить в проект</button>
-              <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное">
+              <button class="btn btn--primary btn--block" type="button" data-i18n="common.invite">Пригласить в проект</button>
+              <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное" data-i18n-aria-label="a11y.saveProfile">
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                   <path d="M12 20s-7-4.35-7-9a3.9 3.9 0 0 1 7-2.4A3.9 3.9 0 0 1 19 11c0 4.65-7 9-7 9Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
                 </svg>
@@ -471,28 +484,31 @@
               <span class="avatar avatar--lg" data-tone="lime">АС</span>
               <div class="person__id">
                 <h3 class="person__name">Артём Соколов</h3>
-                <p class="person__role">Backend · Python · 17 лет</p>
+                <p class="person__role" data-i18n="demo.p2.role">Backend · Python · 17 лет</p>
               </div>
-              <div class="ring" data-p="91" style="--p: 0" role="img" aria-label="Совпадение 91 процент">
+              <div class="ring" data-p="91" style="--p: 0" role="img" aria-label="Совпадение 91 процент" data-i18n-aria-label="a11y.match91">
                 <span>91<small>%</small></span>
               </div>
             </div>
-            <p class="person__bio">
+            <p class="person__bio" data-i18n="demo.p2.bio">
               Пишет API на FastAPI, разбирается в данных. Ищет проект про экологию или город.
             </p>
             <dl class="person__facts">
               <div class="fact">
-                <dt>Навыки</dt>
+                <dt data-i18n="common.skills">Навыки</dt>
                 <dd class="tags"><span>Python</span><span>FastAPI</span><span>SQL</span></dd>
               </div>
               <div class="fact">
-                <dt>Совпало</dt>
-                <dd class="tags tags--match"><span>Эко-tech</span><span>Данные</span></dd>
+                <dt data-i18n="common.matched">Совпало</dt>
+                <dd class="tags tags--match">
+                  <span data-i18n="tag.eco">Эко-tech</span>
+                  <span data-i18n="tag.data">Данные</span>
+                </dd>
               </div>
             </dl>
             <div class="person__foot">
-              <button class="btn btn--primary btn--block" type="button">Пригласить в проект</button>
-              <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное">
+              <button class="btn btn--primary btn--block" type="button" data-i18n="common.invite">Пригласить в проект</button>
+              <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное" data-i18n-aria-label="a11y.saveProfile">
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                   <path d="M12 20s-7-4.35-7-9a3.9 3.9 0 0 1 7-2.4A3.9 3.9 0 0 1 19 11c0 4.65-7 9-7 9Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
                 </svg>
@@ -505,28 +521,31 @@
               <span class="avatar avatar--lg" data-tone="coral">ЛД</span>
               <div class="person__id">
                 <h3 class="person__name">Лиза Дорохова</h3>
-                <p class="person__role">UX/UI-дизайн · 15 лет</p>
+                <p class="person__role" data-i18n="demo.p3.role">UX/UI-дизайн · 15 лет</p>
               </div>
-              <div class="ring" data-p="79" style="--p: 0" role="img" aria-label="Совпадение 79 процентов">
+              <div class="ring" data-p="79" style="--p: 0" role="img" aria-label="Совпадение 79 процентов" data-i18n-aria-label="a11y.match79">
                 <span>79<small>%</small></span>
               </div>
             </div>
-            <p class="person__bio">
+            <p class="person__bio" data-i18n="demo.p3.bio">
               Делает понятные интерфейсы и любит исследовать пользователей. Ведёт школьную студию.
             </p>
             <dl class="person__facts">
               <div class="fact">
-                <dt>Навыки</dt>
+                <dt data-i18n="common.skills">Навыки</dt>
                 <dd class="tags"><span>Figma</span><span>UX-research</span></dd>
               </div>
               <div class="fact">
-                <dt>Совпало</dt>
-                <dd class="tags tags--match"><span>EdTech</span><span>Медиа</span></dd>
+                <dt data-i18n="common.matched">Совпало</dt>
+                <dd class="tags tags--match">
+                  <span>EdTech</span>
+                  <span data-i18n="tag.media">Медиа</span>
+                </dd>
               </div>
             </dl>
             <div class="person__foot">
-              <button class="btn btn--primary btn--block" type="button">Пригласить в проект</button>
-              <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное">
+              <button class="btn btn--primary btn--block" type="button" data-i18n="common.invite">Пригласить в проект</button>
+              <button class="btn btn--icon" type="button" aria-label="Сохранить профиль в избранное" data-i18n-aria-label="a11y.saveProfile">
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                   <path d="M12 20s-7-4.35-7-9a3.9 3.9 0 0 1 7-2.4A3.9 3.9 0 0 1 19 11c0 4.65-7 9-7 9Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
                 </svg>
@@ -542,7 +561,7 @@
               <path d="M12 11v5.5M12 7.6v.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
             </svg>
           </span>
-          <p>
+          <p data-i18n-html="demo.notice">
             <strong>Это демонстрация алгоритма.</strong> Проценты совпадения рассчитаны
             на учебных данных и не являются реальными результатами AI.
           </p>
@@ -554,9 +573,11 @@
     <section class="section section--dark" id="research">
       <div class="container">
         <header class="section__head reveal">
-          <p class="eyebrow eyebrow--light">Исследование</p>
-          <h2 class="section__title">Проект начинается с вопроса, <em>а не с кода</em></h2>
-          <p class="section__lead">
+          <p class="eyebrow eyebrow--light" data-i18n="research.eyebrow">Исследование</p>
+          <h2 class="section__title" data-i18n-html="research.title">
+            Проект начинается с вопроса, <em>а не с кода</em>
+          </h2>
+          <p class="section__lead" data-i18n="research.lead">
             Тема: «Роль искусственного интеллекта в поддержке студенческого предпринимательства
             и совместной разработки проектов».
           </p>
@@ -565,36 +586,36 @@
         <div class="research-grid">
           <article class="research reveal">
             <p class="research__kicker">01 · Research Paper</p>
-            <h3 class="research__title">Полное исследование</h3>
-            <p class="research__text">
+            <h3 class="research__title" data-i18n="research.r1.title">Полное исследование</h3>
+            <p class="research__text" data-i18n="research.r1.text">
               Почему школьникам сложно доводить идеи до проекта и как AI-мэтчинг меняет
               поиск команды. Обзор литературы, методология, выводы.
             </p>
-            <p class="research__meta">В работе · ~20 страниц</p>
+            <p class="research__meta" data-i18n="research.r1.meta">В работе · ~20 страниц</p>
           </article>
 
           <article class="research reveal" data-delay="1">
             <p class="research__kicker">02 · Research Findings</p>
-            <h3 class="research__title">Данные опроса</h3>
-            <p class="research__text">
+            <h3 class="research__title" data-i18n="research.r2.title">Данные опроса</h3>
+            <p class="research__text" data-i18n="research.r2.text">
               Опрос школьников 15–18 лет: чего не хватает для старта, где ищут команду
               и что мешает дойти до результата.
             </p>
-            <p class="research__meta">128 ответов · 5 диаграмм</p>
+            <p class="research__meta" data-i18n="research.r2.meta">128 ответов · 5 диаграмм</p>
           </article>
 
           <article class="research reveal" data-delay="2">
             <p class="research__kicker">03 · Business Model</p>
-            <h3 class="research__title">Бизнес-модель</h3>
-            <p class="research__text">
+            <h3 class="research__title" data-i18n="research.r3.title">Бизнес-модель</h3>
+            <p class="research__text" data-i18n="research.r3.text">
               Целевая аудитория, ценностное предложение, каналы привлечения и способы
               монетизации без платы со стороны школьников.
             </p>
-            <p class="research__meta">Lean Canvas · unit-экономика</p>
+            <p class="research__meta" data-i18n="research.r3.meta">Lean Canvas · unit-экономика</p>
           </article>
         </div>
 
-        <p class="research__note reveal">
+        <p class="research__note reveal" data-i18n="research.note">
           Материалы появятся по мере готовности — прототип сайта идёт параллельно с исследованием.
         </p>
       </div>
@@ -605,19 +626,19 @@
       <div class="container">
         <div class="cta__card reveal">
           <div class="cta__glow" aria-hidden="true"></div>
-          <p class="eyebrow eyebrow--light">Следующий шаг</p>
-          <h2 class="cta__title">Твоя идея заслуживает команды</h2>
-          <p class="cta__text">
+          <p class="eyebrow eyebrow--light" data-i18n="cta.eyebrow">Следующий шаг</p>
+          <h2 class="cta__title" data-i18n="cta.title">Твоя идея заслуживает команды</h2>
+          <p class="cta__text" data-i18n="cta.text">
             Заполни профиль и посмотри, кто уже ищет человека с твоими навыками.
           </p>
           <div class="cta__actions">
             <a class="btn btn--lime btn--lg" href="#match">
-              Найти тиммейта
+              <span data-i18n="hero.ctaPrimary">Найти тиммейта</span>
               <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
                 <path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </a>
-            <span class="cta__hint">Учебный прототип · регистрация не требуется</span>
+            <span class="cta__hint" data-i18n="cta.hint">Учебный прототип · регистрация не требуется</span>
           </div>
         </div>
       </div>
@@ -638,30 +659,30 @@
           </span>
           <span class="brand__name">Project<span>Match</span></span>
         </a>
-        <p class="footer__tagline">
+        <p class="footer__tagline" data-i18n="footer.tagline">
           AI-платформа, которая помогает школьникам находить команду
           и доводить собственные идеи до результата.
         </p>
       </div>
 
-      <nav class="footer__col" aria-label="Продукт">
-        <h4>Продукт</h4>
-        <a href="#how">Как это работает</a>
-        <a href="#features">Возможности</a>
-        <a href="#match">AI Matching</a>
-        <span class="footer__soon">Профиль · скоро</span>
-        <span class="footer__soon">Team Workspace · скоро</span>
+      <nav class="footer__col" aria-label="Продукт" data-i18n-aria-label="footer.product">
+        <h4 data-i18n="footer.product">Продукт</h4>
+        <a href="#how" data-i18n="nav.how">Как это работает</a>
+        <a href="#features" data-i18n="nav.features">Возможности</a>
+        <a href="#match" data-i18n="nav.match">AI Matching</a>
+        <span class="footer__soon" data-i18n="footer.soonProfile">Профиль · скоро</span>
+        <span class="footer__soon" data-i18n="footer.soonWorkspace">Team Workspace · скоро</span>
       </nav>
 
-      <nav class="footer__col" aria-label="Исследование">
-        <h4>Исследование</h4>
+      <nav class="footer__col" aria-label="Исследование" data-i18n-aria-label="footer.research">
+        <h4 data-i18n="footer.research">Исследование</h4>
         <a href="#research">Research Paper</a>
         <a href="#research">Research Findings</a>
         <a href="#research">Business Model</a>
       </nav>
 
-      <nav class="footer__col" aria-label="Контакты">
-        <h4>Контакты</h4>
+      <nav class="footer__col" aria-label="Контакты" data-i18n-aria-label="footer.contacts">
+        <h4 data-i18n="footer.contacts">Контакты</h4>
         <a href="#research">Telegram</a>
         <a href="#research">Email</a>
         <a href="#research">GitHub</a>
@@ -669,11 +690,12 @@
     </div>
 
     <div class="container footer__bottom">
-      <p>© <span id="year">2026</span> ProjectMatch · учебный проект</p>
-      <p>Имена, совпадения и метрики — демонстрационные</p>
+      <p>© <span id="year">2026</span> ProjectMatch · <span data-i18n="footer.edu">учебный проект</span></p>
+      <p data-i18n="footer.disclaimer">Имена, совпадения и метрики — демонстрационные</p>
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
