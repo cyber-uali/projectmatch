@@ -132,7 +132,6 @@ function createProjectMatchSurvey() {
       'Публичные выступления',
       'Пока ничего уверенно'
     ])
-    .setValidation(FormApp.createCheckboxValidation().setMaximumCheckedItems(3))
     .setRequired(true);
 
   form.addCheckboxItem()
