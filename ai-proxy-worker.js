@@ -61,7 +61,7 @@ export default {
 
     const model = typeof body.model === 'string' && /^[a-zA-Z0-9._-]+$/.test(body.model)
       ? body.model
-      : 'gemini-2.0-flash';
+      : 'gemini-3.6-flash';
 
     let upstream;
     try {

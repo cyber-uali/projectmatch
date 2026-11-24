@@ -18,7 +18,7 @@
 
   var KEY_STORAGE = 'pm-ai-key';
   var ENDPOINT_STORAGE = 'pm-ai-endpoint';
-  var DEFAULT_MODEL = 'gemini-2.0-flash';
+  var DEFAULT_MODEL = 'gemini-3.6-flash';
   var API = 'https://generativelanguage.googleapis.com/v1beta/models/';
 
   var outer = window.PM_AI_CONFIG || {};
