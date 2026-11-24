@@ -27,6 +27,7 @@ window.PM_I18N = {
     'nav.features': 'Возможности',
     'nav.match': 'AI Matching',
     'nav.research': 'Исследование',
+    'nav.search': 'Поиск',
     'nav.cta': 'Найти тиммейта',
 
     'hero.eyebrow': 'AI-мэтчинг для школьников 15–18 лет',
@@ -124,6 +125,11 @@ window.PM_I18N = {
     'demo.p3.bio': 'Делает понятные интерфейсы и любит исследовать пользователей. Ведёт школьную студию.',
     'demo.notice': '<strong>Это демонстрация алгоритма.</strong> Проценты совпадения рассчитаны на учебных данных и не являются реальными результатами AI.',
 
+    'matchCta.eyebrow': 'База тиммейтов',
+    'matchCta.title': '40 профилей уже можно искать',
+    'matchCta.text': 'Поиск по имени, роли и навыкам, фильтры по классу и занятости, профиль кандидата и приглашение в проект.',
+    'matchCta.action': 'Открыть поиск',
+
     'research.eyebrow': 'Исследование',
     'research.title': 'Проект начинается с вопроса, <em>а не с кода</em>',
     'research.lead': 'Тема: «Роль искусственного интеллекта в поддержке студенческого предпринимательства и совместной разработки проектов».',
@@ -150,7 +156,62 @@ window.PM_I18N = {
     'footer.soonProfile': 'Профиль · скоро',
     'footer.soonWorkspace': 'Team Workspace · скоро',
     'footer.edu': 'учебный проект',
-    'footer.disclaimer': 'Имена, совпадения и метрики — демонстрационные'
+    'footer.disclaimer': 'Имена, совпадения и метрики — демонстрационные',
+    'footer.search': 'Поиск тиммейтов',
+
+    /* ---------- Поиск тиммейтов ---------- */
+    'search.meta.title': 'Поиск тиммейтов — ProjectMatch',
+    'search.meta.description': 'Найдите тиммейтов по имени, роли, навыку или интересу: дизайнеры, разработчики, исследователи и организаторы для школьных проектов.',
+    'search.eyebrow': 'Поиск тиммейтов',
+    'search.title': 'Найди <em>свою</em> команду',
+    'search.lead': 'Ищите по имени, роли или навыку — база сама поймёт, что «дизайнер» — это дизайнеры, а «пайтон» и «питон» — Python.',
+    'search.label': 'Поиск тиммейтов',
+    'search.placeholder': 'Имя, роль или навык: «дизайнер», «пайтон», «Маша»',
+    'search.submit': 'Найти',
+    'search.clear': 'Очистить поиск',
+    'search.hint': 'Попробуйте',
+    'search.demo': 'Демо-база: 40 учебных профилей, имена и биографии вымышленные',
+    'search.filters': 'Фильтры',
+    'search.filters.show': 'Фильтры',
+    'search.role': 'Роль',
+    'search.interests': 'Интересы',
+    'search.grade': 'Класс',
+    'search.capacity': 'Занятость',
+    'search.favorites': 'Только избранное',
+    'search.reset': 'Сбросить',
+    'search.results': 'Кандидаты',
+    'search.sort': 'Сортировка',
+    'search.sort.relevance': 'По релевантности',
+    'search.sort.name': 'По имени',
+    'search.sort.grade': 'По классу',
+    'search.count.one': 'Найден {n} человек',
+    'search.count.few': 'Найдено {n} человека',
+    'search.count.many': 'Найдено {n} человек',
+    'search.empty.title': 'Никого не нашли',
+    'search.empty.text': 'Попробуйте другой запрос или сбросьте фильтры.',
+    'search.empty.reset': 'Сбросить поиск',
+    'search.note': 'Релевантность считается по вашему запросу и фильтрам — это поиск по базе, а не оценка человека.',
+    'search.card.invite': 'Пригласить',
+    'search.card.invited': 'Приглашение отправлено',
+    'search.card.fav': 'Сохранить в избранное',
+    'search.card.unfav': 'Убрать из избранного',
+    'search.relevance': 'Совпадение с запросом',
+    'search.lookingFor': 'Ищет в команду',
+    'search.projects': 'Проектов доведено до результата',
+    'search.modal.close': 'Закрыть профиль',
+    'search.toast.invited': 'Приглашение отправлено: {name}',
+    'search.toast.already': 'Приглашение уже отправлено',
+    'search.toast.saved': 'Профиль в избранном',
+    'search.toast.removed': 'Убрано из избранного',
+    'grade.8': '8 класс',
+    'grade.9': '9 класс',
+    'grade.10': '10 класс',
+    'grade.11': '11 класс',
+    'capacity.lt2': 'Меньше 2 ч/нед',
+    'capacity.2-4': '2–4 ч/нед',
+    'capacity.5-7': '5–7 ч/нед',
+    'capacity.gt7': 'Больше 7 ч/нед',
+    'role.any': 'Любая роль'
   },
 
   /* ------------------------------------------------------------------ KK */
@@ -177,6 +238,7 @@ window.PM_I18N = {
     'nav.features': 'Мүмкіндіктер',
     'nav.match': 'AI Matching',
     'nav.research': 'Зерттеу',
+    'nav.search': 'Іздеу',
     'nav.cta': 'Тиммейт табу',
 
     'hero.eyebrow': '15–18 жасар оқушыларға арналған AI-мэтчинг',
@@ -274,6 +336,11 @@ window.PM_I18N = {
     'demo.p3.bio': 'Түсінікті интерфейстер жасайды және қолданушыларды зерттеуді ұнатады. Мектеп студиясын басқарады.',
     'demo.notice': '<strong>Бұл алгоритм демонстрациясы.</strong> Сәйкестік пайыздары оқу деректерімен есептелген және нақты AI нәтижелері болып саналмайды.',
 
+    'matchCta.eyebrow': 'Тиммейт базасы',
+    'matchCta.title': '40 профильді қазірдің өзінде іздеуге болады',
+    'matchCta.text': 'Есім, рөл және дағды бойынша іздеу, сынып пен жүктеме бойынша сүзгілер, кандидат профилі және жобаға шақыру.',
+    'matchCta.action': 'Іздеуді ашу',
+
     'research.eyebrow': 'Зерттеу',
     'research.title': 'Жоба сұрақтан басталады, <em>кодтан емес</em>',
     'research.lead': 'Тақырып: «Жасанды интеллекттің оқушылардың кәсіпкерлігін және бірлескен жоба әзірлеуді қолдаудағы рөлі».',
@@ -300,7 +367,62 @@ window.PM_I18N = {
     'footer.soonProfile': 'Профиль · жақында',
     'footer.soonWorkspace': 'Team Workspace · жақында',
     'footer.edu': 'оқу жобасы',
-    'footer.disclaimer': 'Есімдер, сәйкестіктер мен метрикалар — демонстрациялық'
+    'footer.disclaimer': 'Есімдер, сәйкестіктер мен метрикалар — демонстрациялық',
+    'footer.search': 'Тиммейт іздеу',
+
+    /* ---------- Тиммейт іздеу ---------- */
+    'search.meta.title': 'Тиммейт іздеу — ProjectMatch',
+    'search.meta.description': 'Тиммейттерді есім, рөл, дағды немесе қызығушылық бойынша табыңыз: дизайнерлер, әзірлеушілер, зерттеушілер және ұйымдастырушылар.',
+    'search.eyebrow': 'Тиммейт іздеу',
+    'search.title': '<em>Өз</em> командаңды тап',
+    'search.lead': 'Есім, рөл немесе дағды бойынша іздеңіз — база «дизайнер» дегеннің дизайнерлер екенін, «пайтон» — Python екенін өзі түсінеді.',
+    'search.label': 'Тиммейт іздеу',
+    'search.placeholder': 'Есім, рөл немесе дағды: «дизайнер», «пайтон», «Маша»',
+    'search.submit': 'Табу',
+    'search.clear': 'Іздеуді тазарту',
+    'search.hint': 'Байқап көріңіз',
+    'search.demo': 'Демо-дерекқор: 40 оқу профилі, есімдер мен өмірбаяндар ойдан шығарылған',
+    'search.filters': 'Сүзгілер',
+    'search.filters.show': 'Сүзгілер',
+    'search.role': 'Рөл',
+    'search.interests': 'Қызығушылықтар',
+    'search.grade': 'Сынып',
+    'search.capacity': 'Жүктеме',
+    'search.favorites': 'Тек таңдаулылар',
+    'search.reset': 'Тазарту',
+    'search.results': 'Үміткерлер',
+    'search.sort': 'Сұрыптау',
+    'search.sort.relevance': 'Сәйкестік бойынша',
+    'search.sort.name': 'Есім бойынша',
+    'search.sort.grade': 'Сынып бойынша',
+    'search.count.one': '{n} адам табылды',
+    'search.count.few': '{n} адам табылды',
+    'search.count.many': '{n} адам табылды',
+    'search.empty.title': 'Ешкім табылмады',
+    'search.empty.text': 'Басқа сұрау көріңіз немесе сүзгілерді тазартыңыз.',
+    'search.empty.reset': 'Іздеуді тазарту',
+    'search.note': 'Сәйкестік сіздің сұрауыңыз бен сүзгілеріңіз бойынша есептеледі — бұл базадан іздеу, адамды бағалау емес.',
+    'search.card.invite': 'Шақыру',
+    'search.card.invited': 'Шақыру жіберілді',
+    'search.card.fav': 'Таңдаулыларға сақтау',
+    'search.card.unfav': 'Таңдаулылардан алу',
+    'search.relevance': 'Сұрауға сәйкестік',
+    'search.lookingFor': 'Командаға іздейді',
+    'search.projects': 'Аяқталған жобалар',
+    'search.modal.close': 'Профильді жабу',
+    'search.toast.invited': 'Шақыру жіберілді: {name}',
+    'search.toast.already': 'Шақыру бұрын жіберілген',
+    'search.toast.saved': 'Профиль таңдаулыларда',
+    'search.toast.removed': 'Таңдаулылардан алынды',
+    'grade.8': '8 сынып',
+    'grade.9': '9 сынып',
+    'grade.10': '10 сынып',
+    'grade.11': '11 сынып',
+    'capacity.lt2': 'Аптасына 2 сағаттан аз',
+    'capacity.2-4': 'Аптасына 2–4 сағат',
+    'capacity.5-7': 'Аптасына 5–7 сағат',
+    'capacity.gt7': 'Аптасына 7 сағаттан көп',
+    'role.any': 'Кез келген рөл'
   }
 };
 
@@ -365,14 +487,25 @@ window.PM_I18N = {
       if (value !== undefined) el.setAttribute('aria-label', value);
     });
 
-    // Метаданные страницы
-    document.title = t('meta.title');
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var value = pack[el.getAttribute('data-i18n-placeholder')];
+      if (value !== undefined) el.setAttribute('placeholder', value);
+    });
+
+    // Метаданные страницы. У внутренних страниц свой набор ключей:
+    // <html data-page="search"> → 'search.meta.title' и т.д.
+    var page = document.documentElement.getAttribute('data-page');
+    function pageKey(key) {
+      return page && pack[page + '.' + key] !== undefined ? page + '.' + key : key;
+    }
+
+    document.title = t(pageKey('meta.title'));
     var desc = document.getElementById('meta-description');
-    if (desc) desc.setAttribute('content', t('meta.description'));
+    if (desc) desc.setAttribute('content', t(pageKey('meta.description')));
     var ogTitle = document.getElementById('og-title');
-    if (ogTitle) ogTitle.setAttribute('content', t('meta.ogTitle'));
+    if (ogTitle) ogTitle.setAttribute('content', t(pageKey('meta.ogTitle')));
     var ogDesc = document.getElementById('og-description');
-    if (ogDesc) ogDesc.setAttribute('content', t('meta.ogDescription'));
+    if (ogDesc) ogDesc.setAttribute('content', t(pageKey('meta.ogDescription')));
 
     // Состояние переключателя
     document.querySelectorAll('[data-lang]').forEach(function (btn) {

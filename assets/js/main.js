@@ -103,6 +103,16 @@
   /* ---------- 5. Счётчик участников ---------- */
   var counters = document.querySelectorAll('[data-count]');
 
+  // Разделитель разрядов зависит от выбранного языка
+  function formatCount(value) {
+    var lang = window.PM_lang ? window.PM_lang() : 'ru';
+    try {
+      return Number(value).toLocaleString(lang === 'kk' ? 'kk-KZ' : 'ru-RU');
+    } catch (e) {
+      return String(value);
+    }
+  }
+
   function runCounter(el) {
     var target = Number(el.getAttribute('data-count')) || 0;
     var duration = 1400;
@@ -114,7 +124,7 @@
       // easeOutCubic — быстро стартует, мягко замедляется
       var eased = 1 - Math.pow(1 - progress, 3);
       var current = Math.round(target * eased);
-      el.textContent = current.toLocaleString('ru-RU');
+      el.textContent = formatCount(current);
       if (progress < 1) window.requestAnimationFrame(frame);
     }
 
@@ -123,7 +133,7 @@
 
   if (reduceMotion || !('IntersectionObserver' in window)) {
     counters.forEach(function (el) {
-      el.textContent = Number(el.getAttribute('data-count')).toLocaleString('ru-RU');
+      el.textContent = formatCount(el.getAttribute('data-count'));
     });
   } else {
     var counterObserver = new IntersectionObserver(function (entries) {
