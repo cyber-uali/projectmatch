@@ -9,6 +9,7 @@
   var DB = window.PM_DB;
   var engine = window.PM_SEARCH;
   var DATA = window.PM_DATA;
+  var AI = window.PM_AI;
   if (!DB || !engine || !DATA) return;
 
   var ROLES = DATA.roles;
@@ -45,7 +46,35 @@
     modal: el('profile-modal'),
     modalBody: el('pmodal-body'),
     modalClose: el('pmodal-close'),
-    toasts: el('toasts')
+    toasts: el('toasts'),
+
+    chatOpen: el('chat-open'),
+    chatFab: el('chat-fab'),
+    chatBadge: el('chat-badge'),
+    chatBadgeFab: el('chat-badge-fab'),
+    chatModal: el('chat-modal'),
+    chatClose: el('chat-close'),
+    chatList: el('chat-list'),
+    chatHead: el('chat-head'),
+    chatMessages: el('chat-messages'),
+    chatForm: el('chat-form'),
+    chatInput: el('chat-input'),
+    chatMode: el('chat-mode'),
+    chatEndpoint: el('chat-endpoint'),
+    chatKey: el('chat-key'),
+    chatSave: el('chat-save'),
+    chatClearKey: el('chat-clear-key'),
+
+    inviteModal: el('invite-modal'),
+    inviteForm: el('invite-form'),
+    inviteClose: el('invite-close'),
+    inviteCancel: el('invite-cancel'),
+    inviteWho: el('invite-who'),
+    inviteProject: el('invite-project'),
+    inviteNewWrap: el('invite-new-wrap'),
+    inviteNew: el('invite-new-project'),
+    inviteMessage: el('invite-message'),
+    inviteError: el('invite-error')
   };
 
   if (!els.grid || !els.q) return;
@@ -62,6 +91,9 @@
 
   var openProfileId = null;
   var searchTimer = null;
+  var inviteProfileId = null;
+  var activeThread = null;
+  var aiBusy = false;
 
   /* ---------------- URL: состояние можно шарить ссылкой ---------------- */
 
@@ -252,7 +284,7 @@
       + '</div>'
       + '<div class="pcard__foot">'
       +   '<button class="btn btn--primary btn--sm btn--block" type="button" data-act="invite" data-id="' + esc(profile.id) + '"'
-      +     (invited ? ' disabled' : '') + '>' + esc(invited ? t('search.card.invited') : t('search.card.invite')) + '</button>'
+      +     '>' + esc(invited ? t('card.invite.again') : t('search.card.invite')) + '</button>'
       +   '<button class="btn btn--icon' + (favorite ? ' is-fav' : '') + '" type="button" data-act="fav" data-id="' + esc(profile.id) + '"'
       +     ' aria-pressed="' + (favorite ? 'true' : 'false') + '"'
       +     ' aria-label="' + esc(favorite ? t('search.card.unfav') : t('search.card.fav')) + '">'
@@ -327,7 +359,7 @@
       + '</div>'
       + '<div class="pmodal__foot">'
       +   '<button class="btn btn--primary btn--block" type="button" data-act="invite" data-id="' + esc(profile.id) + '"'
-      +     (invited ? ' disabled' : '') + '>' + esc(invited ? t('search.card.invited') : t('search.card.invite')) + '</button>'
+      +     '>' + esc(invited ? t('card.invite.again') : t('search.card.invite')) + '</button>'
       +   '<button class="btn btn--outline" type="button" data-act="fav" data-id="' + esc(profile.id) + '">'
       +     esc(favorite ? t('search.card.unfav') : t('search.card.fav')) + '</button>'
       + '</div>';
@@ -361,23 +393,285 @@
     else els.modal.removeAttribute('open');
   }
 
-  /* ---------------- действия ---------------- */
+  /* ---------------- диалоги ---------------- */
 
-  function invite(id) {
+  function showDialog(dialog) {
+    if (!dialog) return;
+    if (typeof dialog.showModal === 'function') {
+      if (!dialog.open) dialog.showModal();
+    } else {
+      dialog.setAttribute('open', '');
+    }
+  }
+
+  function hideDialog(dialog) {
+    if (!dialog) return;
+    if (typeof dialog.close === 'function' && dialog.open) dialog.close();
+    else dialog.removeAttribute('open');
+  }
+
+  /* ---------------- приглашение в проект ---------------- */
+
+  function openInvite(id) {
     var profile = DB.get(id);
+    if (!profile || !els.inviteModal) return;
+    if (els.modal && els.modal.open) closeProfile();
+
+    inviteProfileId = id;
+    var projects = DB.projects();
+    var options = projects.map(function (project) {
+      return '<option value="' + esc(project.id) + '">' + esc(project.name) + '</option>';
+    }).join('');
+    options += '<option value="__new">' + esc(t('invite.project.new')) + '</option>';
+
+    els.inviteProject.innerHTML = options;
+    els.inviteNewWrap.hidden = projects.length > 0;
+    els.inviteNew.value = '';
+    els.inviteMessage.value = '';
+    els.inviteWho.textContent = profile.name;
+    els.inviteError.hidden = true;
+    showDialog(els.inviteModal);
+
+    window.setTimeout(function () {
+      (projects.length ? els.inviteProject : els.inviteNew).focus();
+    }, 60);
+  }
+
+  function inviteError(message) {
+    if (!els.inviteError) return;
+    els.inviteError.textContent = message;
+    els.inviteError.hidden = false;
+  }
+
+  function submitInvite(event) {
+    event.preventDefault();
+    var profile = DB.get(inviteProfileId);
     if (!profile) return;
 
-    if (DB.isInvited(id)) {
-      toast(t('search.toast.already'));
+    var selected = els.inviteProject.value;
+    var project;
+    if (selected === '__new') {
+      project = DB.createProject(els.inviteNew.value);
+      if (!project) {
+        inviteError(t('invite.project.name'));
+        els.inviteNew.focus();
+        return;
+      }
+    } else {
+      project = DB.getProject(selected);
+    }
+    if (!project) {
+      inviteError(t('invite.project.name'));
       return;
     }
 
-    DB.invite(id);
-    var firstName = String(profile.name).split(' ')[0];
-    toast(t('search.toast.invited').replace('{name}', firstName));
+    var invite = DB.inviteToProject(profile.id, project.id, els.inviteMessage.value);
+    if (!invite) {
+      inviteError(t('invite.duplicate'));
+      return;
+    }
 
+    hideDialog(els.inviteModal);
+    toast(t('invite.sent').replace('{project}', project.name));
     renderResults();
     refreshModal();
+    updateBadges();
+    openChat(DB.threadId(project.id, profile.id));
+  }
+
+  /* ---------------- чат ---------------- */
+
+  function findThread() {
+    if (!activeThread) return null;
+    var list = DB.threads();
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id === activeThread) return list[i];
+    }
+    return null;
+  }
+
+  function updateBadges() {
+    var count = DB.threads().length;
+    [els.chatBadge, els.chatBadgeFab].forEach(function (badge) {
+      if (!badge) return;
+      badge.textContent = String(count);
+      badge.hidden = count === 0;
+    });
+  }
+
+  function lastMessageText(thread) {
+    if (!thread.last) return t('chat.messages');
+    if (thread.last.kind === 'invite' && !thread.last.text) {
+      return t('chat.invited').replace('{project}', thread.project.name);
+    }
+    return thread.last.text || t('chat.messages');
+  }
+
+  function renderChatThreads() {
+    if (!els.chatList) return;
+    var threads = DB.threads();
+    if (!threads.length) {
+      els.chatList.innerHTML = '<div class="chat__empty">'
+        + '<h3>' + esc(t('chat.empty.title')) + '</h3>'
+        + '<p>' + esc(t('chat.empty.text')) + '</p>'
+        + '<button class="btn btn--primary btn--sm" type="button" data-act="chat-find">'
+        + esc(t('chat.empty.action')) + '</button></div>';
+      return;
+    }
+
+    els.chatList.innerHTML = threads.map(function (thread) {
+      return '<button class="thread' + (thread.id === activeThread ? ' is-active' : '') + '"'
+        + ' type="button" data-thread="' + esc(thread.id) + '">'
+        + '<span class="avatar" data-tone="' + esc(thread.profile.tone) + '">' + esc(thread.profile.initials) + '</span>'
+        + '<span class="thread__body">'
+        +   '<span class="thread__name">' + esc(thread.profile.name) + '</span>'
+        +   '<span class="thread__project">' + esc(thread.project.name) + '</span>'
+        +   '<span class="thread__last">' + esc(lastMessageText(thread)) + '</span>'
+        + '</span></button>';
+    }).join('');
+  }
+
+  function renderChatHead() {
+    if (!els.chatHead) return;
+    var thread = findThread();
+    if (!thread) {
+      els.chatHead.innerHTML = '<div class="chat__head-main"><p class="chat__head-name">'
+        + esc(t('chat.title')) + '</p></div>';
+      return;
+    }
+    els.chatHead.innerHTML = '<span class="avatar" data-tone="' + esc(thread.profile.tone) + '">'
+      + esc(thread.profile.initials) + '</span>'
+      + '<div class="chat__head-main">'
+      +   '<p class="chat__head-name">' + esc(thread.profile.name) + '</p>'
+      +   '<p class="chat__head-meta">' + esc(t('chat.project')) + ': ' + esc(thread.project.name) + '</p>'
+      + '</div>'
+      + '<button class="btn btn--outline btn--sm chat__profile-btn" type="button"'
+      + ' data-act="chat-profile" data-id="' + esc(thread.profile.id) + '">'
+      + esc(t('chat.profile')) + '</button>';
+  }
+
+  function timeLabel(at) {
+    try {
+      return new Date(at).toLocaleTimeString(lang === 'kk' ? 'kk-KZ' : 'ru-RU', {
+        hour: '2-digit', minute: '2-digit'
+      });
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function bubbleHTML(msg) {
+    var time = '<span class="bubble__time">' + esc(timeLabel(msg.at)) + '</span>';
+    return '<div class="bubble bubble--' + (msg.from === 'them' ? 'them' : 'me') + '">'
+      + esc(msg.text) + time + '</div>';
+  }
+
+  function renderMessages() {
+    if (!els.chatMessages) return;
+    var thread = findThread();
+    if (!thread) {
+      els.chatMessages.innerHTML = '<div class="chat__placeholder">'
+        + '<h3>' + esc(t('chat.empty.title')) + '</h3>'
+        + '<p>' + esc(t('chat.empty.text')) + '</p></div>';
+      return;
+    }
+
+    var list = DB.messages(activeThread);
+    if (!list.length) {
+      els.chatMessages.innerHTML = '<div class="chat__placeholder">'
+        + '<p>' + esc(t('chat.empty.text')) + '</p></div>';
+      return;
+    }
+
+    els.chatMessages.innerHTML = list.map(function (msg) {
+      if (msg.kind === 'invite') {
+        var caption = '<div class="bubble bubble--invite">'
+          + esc(t('chat.invited').replace('{project}', thread.project.name)) + '</div>';
+        return msg.text ? caption + bubbleHTML(msg) : caption;
+      }
+      return bubbleHTML(msg);
+    }).join('');
+
+    els.chatMessages.scrollTop = els.chatMessages.scrollHeight;
+  }
+
+  function syncAISettings() {
+    if (!AI || !els.chatMode) return;
+    var cfg = AI.config();
+    var mode = AI.mode();
+    els.chatMode.textContent = t('chat.ai.' + mode) + (cfg.model ? ' · ' + cfg.model : '');
+    if (els.chatEndpoint) els.chatEndpoint.value = cfg.endpoint;
+    // Ключ не показываем полностью — только факт, что он сохранён.
+    if (els.chatKey) els.chatKey.placeholder = cfg.key ? '••••••••' : t('chat.key.placeholder');
+  }
+
+  function openChat(thread) {
+    if (!els.chatModal) return;
+    var list = DB.threads();
+    if (thread) activeThread = thread;
+    if (!activeThread || !list.some(function (item) { return item.id === activeThread; })) {
+      activeThread = list.length ? list[0].id : null;
+    }
+
+    renderChatThreads();
+    renderChatHead();
+    renderMessages();
+    syncAISettings();
+    showDialog(els.chatModal);
+
+    window.setTimeout(function () {
+      if (activeThread && els.chatInput) els.chatInput.focus();
+    }, 60);
+  }
+
+  function sendChat(event) {
+    event.preventDefault();
+    if (aiBusy || !els.chatInput) return;
+    var thread = findThread();
+    var text = els.chatInput.value.trim();
+    if (!thread || !text) return;
+
+    DB.sendMessage(activeThread, text, 'me');
+    els.chatInput.value = '';
+    renderMessages();
+    renderChatThreads();
+
+    aiBusy = true;
+    var typing = document.createElement('div');
+    typing.className = 'typing';
+    typing.textContent = t('chat.typing');
+    if (els.chatMessages) {
+      els.chatMessages.appendChild(typing);
+      els.chatMessages.scrollTop = els.chatMessages.scrollHeight;
+    }
+
+    var history = DB.messages(activeThread).filter(function (msg) {
+      return msg.kind !== 'invite';
+    }).map(function (msg) {
+      return { from: msg.from, text: msg.text };
+    });
+
+    var answer = AI && AI.reply ? AI.reply({
+      profile: thread.profile,
+      roleLabel: roleLabel(thread.profile.role),
+      bio: bioOf(thread.profile),
+      project: thread.project,
+      lang: lang,
+      history: history,
+      message: text
+    }) : Promise.resolve({ text: t('chat.ai.error'), source: 'demo' });
+
+    answer.then(function (result) {
+      if (typing.parentNode) typing.remove();
+      DB.sendMessage(activeThread, result.text, 'them');
+      renderMessages();
+      renderChatThreads();
+      if (result.source === 'demo' && result.error) toast(t('chat.ai.error'));
+    }).catch(function () {
+      if (typing.parentNode) typing.remove();
+    }).then(function () {
+      aiBusy = false;
+    });
   }
 
   function toggleFavorite(id) {
@@ -500,7 +794,7 @@
     if (button) {
       var action = button.getAttribute('data-act');
       var id = button.getAttribute('data-id');
-      if (action === 'invite') invite(id);
+      if (action === 'invite') openInvite(id);
       else if (action === 'fav') toggleFavorite(id);
       return;
     }
@@ -515,7 +809,7 @@
       if (!button) return;
       var action = button.getAttribute('data-act');
       var id = button.getAttribute('data-id');
-      if (action === 'invite') invite(id);
+      if (action === 'invite') openInvite(id);
       else if (action === 'fav') toggleFavorite(id);
     });
   }
@@ -527,6 +821,88 @@
       if (event.target === els.modal) closeProfile();
     });
     els.modal.addEventListener('close', function () { openProfileId = null; });
+  }
+
+  /* ---------------- события приглашений и чата ---------------- */
+
+  if (els.inviteProject) {
+    els.inviteProject.addEventListener('change', function () {
+      if (!els.inviteNewWrap) return;
+      els.inviteNewWrap.hidden = els.inviteProject.value !== '__new';
+      if (!els.inviteNewWrap.hidden) els.inviteNew.focus();
+    });
+  }
+  if (els.inviteForm) els.inviteForm.addEventListener('submit', submitInvite);
+  if (els.inviteClose) els.inviteClose.addEventListener('click', function () { hideDialog(els.inviteModal); });
+  if (els.inviteCancel) els.inviteCancel.addEventListener('click', function () { hideDialog(els.inviteModal); });
+  if (els.inviteModal) {
+    els.inviteModal.addEventListener('click', function (event) {
+      if (event.target === els.inviteModal) hideDialog(els.inviteModal);
+    });
+  }
+
+  [els.chatOpen, els.chatFab].forEach(function (button) {
+    if (button) button.addEventListener('click', function () { openChat(null); });
+  });
+  if (els.chatClose) els.chatClose.addEventListener('click', function () { hideDialog(els.chatModal); });
+  if (els.chatModal) {
+    els.chatModal.addEventListener('click', function (event) {
+      if (event.target === els.chatModal) hideDialog(els.chatModal);
+    });
+  }
+
+  if (els.chatList) {
+    els.chatList.addEventListener('click', function (event) {
+      var find = event.target.closest('[data-act="chat-find"]');
+      if (find) {
+        hideDialog(els.chatModal);
+        if (els.q) {
+          els.q.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          els.q.focus();
+        }
+        return;
+      }
+      var thread = event.target.closest('[data-thread]');
+      if (!thread) return;
+      activeThread = thread.getAttribute('data-thread');
+      renderChatThreads();
+      renderChatHead();
+      renderMessages();
+      if (els.chatInput) els.chatInput.focus();
+    });
+  }
+
+  if (els.chatHead) {
+    els.chatHead.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-act="chat-profile"]');
+      if (!button) return;
+      var id = button.getAttribute('data-id');
+      hideDialog(els.chatModal);
+      openProfile(id);
+    });
+  }
+
+  if (els.chatForm) els.chatForm.addEventListener('submit', sendChat);
+
+  if (els.chatSave) {
+    els.chatSave.addEventListener('click', function () {
+      if (!AI) return;
+      AI.setEndpoint(els.chatEndpoint ? els.chatEndpoint.value.trim() : '');
+      var key = els.chatKey ? els.chatKey.value.trim() : '';
+      if (key) AI.setKey(key);
+      if (els.chatKey) els.chatKey.value = '';
+      syncAISettings();
+      toast(t('chat.key.save'));
+    });
+  }
+
+  if (els.chatClearKey) {
+    els.chatClearKey.addEventListener('click', function () {
+      if (AI) AI.setKey('');
+      if (els.chatKey) els.chatKey.value = '';
+      syncAISettings();
+      toast(t('chat.key.clear'));
+    });
   }
 
   // «/» фокусирует поиск, как в каталогах
@@ -544,6 +920,16 @@
     syncFilters();
     renderResults();
     refreshModal();
+    if (els.inviteModal && els.inviteModal.open && inviteProfileId) {
+      var profile = DB.get(inviteProfileId);
+      if (profile) els.inviteWho.textContent = profile.name;
+    }
+    if (els.chatModal && els.chatModal.open) {
+      renderChatThreads();
+      renderChatHead();
+      renderMessages();
+      syncAISettings();
+    }
   });
 
   /* ---------------- старт ---------------- */
@@ -554,4 +940,6 @@
   buildFilters();
   syncFilters();
   renderResults();
+  updateBadges();
+  syncAISettings();
 })();
