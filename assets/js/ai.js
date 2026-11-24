@@ -98,7 +98,7 @@
       model: config().model,
       systemInstruction: { parts: [{ text: systemPrompt(ctx) }] },
       contents: contents(ctx),
-      generationConfig: { temperature: 0.9, maxOutputTokens: 180 }
+      generationConfig: { temperature: 0.9, maxOutputTokens: 1024 }
     };
   }
 
@@ -106,7 +106,10 @@
     var text = data && data.text;
     if (!text && data && data.candidates && data.candidates.length) {
       var parts = data.candidates[0].content && data.candidates[0].content.parts;
-      if (parts && parts.length) text = parts.map(function (p) { return p.text || ''; }).join('');
+      if (parts && parts.length) {
+        text = parts.filter(function (p) { return !p.thought; })
+          .map(function (p) { return p.text || ''; }).join('');
+      }
     }
     return cute(text, 800);
   }

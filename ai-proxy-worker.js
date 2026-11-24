@@ -76,7 +76,7 @@ export default {
           body: JSON.stringify({
             systemInstruction: body.systemInstruction,
             contents: body.contents,
-            generationConfig: body.generationConfig || { temperature: 0.9, maxOutputTokens: 180 }
+            generationConfig: body.generationConfig || { temperature: 0.9, maxOutputTokens: 1024 }
           })
         }
       );
